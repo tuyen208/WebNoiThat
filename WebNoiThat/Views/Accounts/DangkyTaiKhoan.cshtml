@@ -1,0 +1,86 @@
+﻿@model WebNoiThat.Models.Customer
+
+@{
+    ViewData["Title"] = "Đăng ký tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var useReg = Session["useReg"] as WebNoiThat.Models.Customer;
+
+}
+<h3>@ViewBag.RegOk</h3>
+@{
+    if (ViewBag.isReg == true)
+    {
+        <button class="btn-primary"> <a style="color:white" href="/Accounts/Login"> Đăng nhập</a> </button>
+    }
+}
+@if (!string.IsNullOrEmpty(ViewBag.RegOk))
+{
+    <div class="alert alert-success">@ViewBag.RegOk</div>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.RegError))
+{
+    <div class="alert alert-danger">@ViewBag.RegError</div>
+}
+<main class="main-content">
+    <div class="login-register-area section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 pt-10 pt-lg-0">
+                    @using (Html.BeginForm("DangkyTaiKhoan", "Accounts", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="login-form">
+                        <h4 class="login-title">Đăng ký tài khoản</h4>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <label>Họ và Tên</label>
+                                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", placeholder = "Họ và tên" } })
+                                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                            </div>
+                        
+
+                        <div class="col-md-12">
+                            <label>Địa chỉ Email</label>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" , placeholder = "Điền Email" }})
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-12">
+                            <label>Số điện thoại</label>
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", placeholder = "Số điện thoại" } })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label>Mật khẩu</label>
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { type = "Password", @class = "form-control", placeholder = "Mật khẩu" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Nhập lại mật khẩu</label>
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Nhập lại mật khẩu" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-12">
+                            <label>Địa chỉ</label>
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Địa chỉ" } })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-12">
+                            <input type="submit" value="Đăng ký" class="btn btn-warning" />
+                        </div>
+                    </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+                 

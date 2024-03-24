@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WebNoiThat.Models.Role>
+
+@{
+    ViewBag.Title = "Quản lý quyền truy cập";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col">#</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoleID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoleName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <a href='@Url.Action("Edit", new { id = item.RoleID } )' class="btn btn-success">Sửa</a>
+                        <a href='@Url.Action("Details", new { id = item.RoleID } )' class="btn btn-primary">Chi tiết</a>
+                        <a href='@Url.Action("Delete", new { id = item.RoleID } )' class="btn btn-danger">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

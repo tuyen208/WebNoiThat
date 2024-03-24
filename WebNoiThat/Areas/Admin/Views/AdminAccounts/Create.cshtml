@@ -1,0 +1,52 @@
+﻿@model WebNoiThat.Models.Account
+
+@{
+    ViewBag.Title = "Tạo mới tài khoản quản trị";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+   <div class="card-body">
+        <h4>Tạo mới tài khoản quản trị</h4>
+        <div class="m-t-25" style="max-width: 700px">
+            <form action="@Url.Action("Create", "AdminAccounts")" method="post">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Họ và tên</label>
+                        <input type="text" class="form-control" name="FullName" placeholder="Họ và tên">
+                    </div> <div class="form-group col-md-6">
+                        <label for="inputPassword4">Số điện thoại</label>
+                        <input type="text" class="form-control" name="Phone" placeholder="Số điện thoại">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Email</label>
+                        <input type="text" class="form-control" name="Email" placeholder="Email">
+                    </div> <div class="form-group col-md-6">
+                        <label for="inputEmail4">Mật khẩu</label>
+                        <input type="text" class="form-control" name="Password" placeholder="Mật khẩu">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Quyền truy cập</label>                       
+                            @Html.DropDownListFor(model => model.RoleID, (IEnumerable<SelectListItem>)ViewBag.DanhMuc, "Chọn danh mục", new { @class = "custom-select", style = "min-width: 200px;" })                 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label for="inputEmail4">Active </label>
+                        <input type="checkbox" id="Active" name="Active" checked value="true">
+                        <label for="Active"></label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Tạo mới</button>
+            </form>
+        </div>
+       </div>
+ }
+

@@ -1,0 +1,143 @@
+﻿<header class="main-header_area position-relative">
+    <div class="header-top border-bottom d-none d-md-block">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <div class="header-top-left">
+                        <ul class="dropdown-wrap text-matterhorn">
+                            <li>
+                                <button class="btn btn-link dropdown-toggle ht-btn" type="button" id="languageButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Tiếng Việt
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="languageButton">
+                                    <li><a class="dropdown-item" href="#">English</a></li>
+                                    <li><a class="dropdown-item" href="#">日本語</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <i class="fa fa-mobile" style=" font-size: 20px; display: inline-block; position: relative; transform: translateY(2px); "></i>
+                                Liên hệ nhanh
+                                <a href="tel:0963102916">096.310.2916</a>
+                            </li>
+                            <li>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="header-top text-matterhorn">
+                        <p class="shipping mb-0">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            Địa chỉ: 25 Số 6, Tăng Nhơn Phú B, Quận 9, Thành phố Hồ Chí Minh
+                        </p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="header-top-right text-matterhorn">
+                        <p class="shipping mb-0">Miễn phí vẫn chuyển đơn hàng từ <span>500k</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-middle py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="header-middle-wrap">
+                        <a href="/" class="header-logo">
+                            <img src="~/DataHA/assets/images/logo/dark.png" alt="Shop hoa quả">
+                        </a>
+                        <div class="header-search-area d-none d-lg-block">
+                            <form class="header-searchbox">
+                                <input id="keyword" name="keyword" class="input-field" type="text" placeholder="Tìm kiếm sản phẩm">
+                                <button class="btn btn-outline-whisper btn-primary-hover" type="submit"><i class="pe-7s-search"></i></button>
+                            </form>
+                        </div>
+                        @{ var u = Session["use"] as WebNoiThat.Models.Customer; }
+                    <div class="col-sm-4 col-md-0" style="padding-left:250px">
+                        <ul> @Html.Partial("~/Views/Cart/GioHangPartial.cshtml")</ul>
+                    </div>
+                        <div class="header-right">
+                            <ul>
+                                <li class="dropdown d-none d-md-block">
+                                    <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button" id="settingButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="pe-7s-users"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButton">
+                                        @{ if (u != null)
+                                            {
+                                                <li> <a class="dropdown-item" href="@Url.Action("Detail", "Accounts", new { id = u.CustomerID })"> Xin chào : @u.Email</a></li>
+
+                                                <li><a class="dropdown-item" href="/Accounts/Logout"> ĐĂNG XUẤT</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li> <a class="dropdown-item" href="/Accounts/DangkyTaiKhoan"> Đăng ký</a> </li>
+                                                <li> <a class="dropdown-item" href="/Accounts/Login"> Đăng nhập</a></li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                                <li class="d-none d-md-block">
+                                    <a href="#">
+                                        <i class="pe-7s-like"></i>
+                                    </a>
+                                </li>
+                                <li class="d-block d-lg-none">
+                                    <a href="#" class="search-btn toolbar-btn">
+                                        <i class="pe-7s-search"></i>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-header header-sticky" data-bg-color="#bac34e">
+        <div class="container">
+            <div class="main-header_nav position-relative">
+                <div class="row align-items-center">
+                    <div class="col-lg-12 d-none d-lg-block">
+                        <div class="main-menu">
+                            <nav class="main-nav">
+                                <ul>
+                                    <li class="drop-holder">
+                                        <a href="/">Trang chủ</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("About", "Home", new { routeName = "About" })">Về chúng tôi</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index", "Product", new { routeName = "ShopProduct" })">Shop</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Details", "Pages", new { Alias = "huong-dan-mua-hang" })">Hướng dẫn mua hàng</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index", "Blog", new { routeName = "Blog" })">Blogs</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Contact", "Home", new { routeName = "Contact" })">Liên hệ</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index", "Order")">Đơn hàng</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-minicart_wrapper" id="miniCart">
+       
+    </div>
+    <div class="global-overlay"></div>
+</header>

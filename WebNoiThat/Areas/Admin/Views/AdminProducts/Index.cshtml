@@ -1,0 +1,155 @@
+﻿@model PagedList.IPagedList<WebNoiThat.Models.Product>
+@using PagedList.Mvc
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="~/Admin/Home" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <span class="breadcrumb-item active">Danh sách sản phẩm : trang @CurrentPage</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-affix m-v-10">
+                            <i class="prefix-icon anticon anticon-search opacity-04"></i>
+                            <input type="text" name="search" value="@ViewBag.CurrentSearch" class="form-control" />
+                            <button id="btn-search" type="submit" class="btn btn-primary">search</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="filter-form">
+                            <form>
+                                <label>Tìm kiếm theo danh mục:</label>
+                                @Html.DropDownList("CatID", ViewData["DanhMuc"] as SelectList, "All", new { @class = "form-control" })
+                                <button id="btn-filter" type="button" class="btn btn-primary">Filter</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 text-right">
+                <a class="btn btn-primary" href="/Admin/AdminProducts/Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Thêm sản phẩm</span></a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Danh mục</th>
+                        <th>Giá</th>
+                        <th>Tồn kho</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="records_table">
+
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.ProductID
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img class="img-fluid rounded" src="~/DataHA/assets/images/others/thumb-9.jpg" style="max-width: 60px" alt="">
+                                        <h6 class="m-b-0 m-l-10">@item.ProductName</h6>
+                                    </div>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cat.CatName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)<a> </a><a>VND</a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UnitsInStock)
+                                </td>
+                                <td>
+                                    @if (item.UnitsInStock.Value > 0)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-success badge-dot m-r-10"></div>
+                                            <div>Còn hàng</div>
+                                        </div>
+                                    }
+                                    @if (item.UnitsInStock.Value <= 0)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-success badge-dot m-r-10"></div>
+                                            <div>Hết hàng</div>
+                                        </div>
+                                    }
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary btn-tone m-r-5" href="@Url.Action("Details", "AdminProducts", new { area = "Admin", id = item.ProductID })">Chi tiết</a>
+                                    <a class="btn btn-secondary btn-tone m-r-5" href="@Url.Action("Edit", "AdminProducts", new { area = "Admin", id = item.ProductID })">Sửa</a>
+                                    <a class="btn btn-success btn-tone m-r-5" href="@Url.Action("Delete", "AdminProducts", new { area = "Admin", id = item.ProductID })">Xóa</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+            <div aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item @(!Model.HasPreviousPage ? "disabled" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    @for (int i = 1; i <= Model.PageCount; i++)
+                    {
+                        <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                            <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                        </li>
+                    }
+                    <li class="page-item @(!Model.HasNextPage ? "disabled" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1 })" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#btn-filter').click(function () {
+                var catId = $('#CatID').val();
+                $.ajax({
+                    url: '@Url.Action("Filtter", "AdminProducts")',
+                    type: 'POST',
+                    data: { CatID: catId },
+                    success: function (result) {
+                        if (result.status === 'success') {
+                            window.location.href = result.redirectUrl;
+                        }
+                    }
+                });
+            });
+            $('#btn-search').click(function () {
+                var search = $('input[name=search]').val();
+                $('#filter-form').append('<input type="hidden" name="search" value="' + search + '" />');
+            });
+        });
+    </script>
+}

@@ -1,0 +1,217 @@
+﻿@model WebNoiThat.ModelViews.HomeViewVM
+@{
+    ViewData["Title"] = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<WebNoiThat.Models.Product> allProduct = ViewBag.AllProducts as List<WebNoiThat.Models.Product>;
+}
+<!-- Begin Slider Area -->
+<div class="slider-area">
+
+    <!-- Main Slider -->
+    <div class="swiper-container main-slider swiper-arrow with-bg_white">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide animation-style-01">
+                <div class="slide-inner bg-height" data-bg-image="/DataHA/assets/images/slider/bg/1-1.jpg">
+                    <div class="parallax-img-wrap">
+                        <div class="chilly">
+                            <div class="scene fill">
+                                <div class="expand-width" data-depth="0.2">
+                                    <img style="width:250px;height:200px" src="~/DataHA/assets/images/slider/inner-img/5.png" alt="Inner Image">
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                    <div class="container">
+                        <div class="parallax-with-content">
+                            <div class="slide-content">
+                                <span class="sub-title mb-3">UY TÍN & CHẤT LƯỢNG</span>
+                                <h2 class="title mb-9">Hân hạnh được phục vụ</h2>
+                                <div class="button-wrap">
+                                    <a class="btn btn-custom-size lg-size btn-primary btn-white-hover rounded-0" href="@Url.Action("Index", "Product",new { routeName = "ShopProduct" })">Mua ngay</a>
+                                </div>
+                            </div>
+                            <div class="parallax-img-wrap">
+                                <div class="tomatoes">
+                                    <div class="scene fill">
+                                        <div class="expand-width" data-depth="0.5">
+                                            <img src="~/DataHA/assets/images/slider/inner-img/Sofa_White.png" alt="Inner Image" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide animation-style-01">
+                <div class="slide-inner bg-height" data-bg-image="/DataHA/assets/images/slider/bg/1-1.jpg">
+                    <div class="parallax-img-wrap">
+                        <div class="chilly">
+                            <div class="scene fill">
+                                <div class="expand-width" data-depth="0.2">
+                                    <img style="width:250px;height:200px" src="~/DataHA/assets/images/slider/inner-img/5.png" alt="Inner Image">
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="container">
+                        <div class="parallax-with-content">
+                            <div class="slide-content">
+                                <span class="sub-title mb-3">UY TÍN & CHẤT LƯỢNG</span>
+                                <h2 class="title mb-9">Hân hạnh được phục vụ</h2>
+                                <div class="button-wrap">
+                                    <a class="btn btn-custom-size lg-size btn-primary btn-white-hover rounded-0" href="@Url.Action("Index", "Product",new { routeName = "ShopProduct" })">Mua ngay</a>
+                                </div>
+                            </div>
+                            <div class="parallax-img-wrap">
+                                <div class="tomatoes">
+                                    <div class="scene fill">
+                                        <div class="expand-width" data-depth="0.5">
+                                            <img src="~/DataHA/assets/images/slider/inner-img/4.png" alt="Inner Image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination with-bg d-md-none"></div>
+
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+</div>
+<!-- Slider Area End Here -->
+<!-- Begin Shipping Area -->
+<div class="shipping-area section-space-top-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="shipping-item">
+                    <div class="shipping-img">
+                        <img style="width:60px;height:50px" src="~/DataHA/assets/images/shipping/icon/7245083.png" alt="Shipping Icon">
+                    </div>
+                    <div class="shipping-content">
+                        <h5 class="title">Giao hàng miễn phí</h5>
+                        <p class="short-desc mb-0">Với đơn hàng từ 5 triệu</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 pt-6 pt-md-0">
+                <div class="shipping-item">
+                    <div class="shipping-img">
+                        <img style="width:60px;height:50px" src="~/DataHA/assets/images/shipping/icon/images.png" alt="Shipping Icon">
+                    </div>
+                    <div class="shipping-content">
+                        <h5 class="title">Hỗ trợ 24/7</h5>
+                        <p class="short-desc mb-0">Hotline: <strong>0916952202</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 pt-6 pt-lg-0">
+                <div class="shipping-item">
+                    <div class="shipping-img">
+                        <img style="width:60px;height:50px" src="~/DataHA/assets/images/shipping/icon/6h.jpg" alt="Shipping Icon">
+                    </div>
+                    <div class="shipping-content">
+                        <h5 class="title">Giờ làm việc</h5>
+                        <p class="short-desc mb-0">Từ 6h00 - 19h30 hàng ngày</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Shipping Area End Here -->
+<!-- Begin Product Area -->
+<div class="product-area section-space-top-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="nav product-tab-nav pb-10" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="active" id="all-items-tab" data-bs-toggle="tab" href="#all-items" role="tab" aria-controls="all-items" aria-selected="true">
+                            <div class="product-tab-icon">
+                                <img style="width:60px;height:60px" src="~/DataHA/assets/images/shipping/icon/3d.png" alt="Product Icon">
+                            </div>
+                            Tất cả sản phẩm
+                        </a>
+                    </li>
+                    @foreach (var item in Model.Products)
+                    {
+                        <li class="nav-item" role="presentation">
+                            <a id="fresh-fruits-tab" data-bs-toggle="tab" href="#@item.category.Alias" role="tab" aria-controls="fresh-fruits" aria-selected="false">
+                                <div class="product-tab-icon">
+                                    <img style="width:80px;height:50px" src="~/DataHA/images/category/@item.category.Thumb" alt="@item.category.Title">
+                                </div>
+                                @item.category.CatName
+                            </a>
+                        </li>
+                    }
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="all-items" role="tabpanel" aria-labelledby="all-items-tab">
+                        @Html.Partial("View", allProduct)
+                    </div>
+                    @foreach (var item in Model.Products)
+                    {
+                        <div class="tab-pane fade" id="@item.category.Alias" role="tabpanel" aria-labelledby="fresh-fruits-tab">
+                            @Html.Partial("View", item.lsProducts)
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Product Area End Here -->
+
+
+<div class="banner-area banner-style-2 section-space-y-axis-100" data-bg-image="/DataHA/assets/images/product/pngtree.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="banner-content">
+                    <div class="section-title">
+                        <span class="sub-title text-danger">Khuyến mãi đặc biệt</span>
+                        <h3 class="title font-size-40 mb-7 text-success">Giảm giá 20% các loại trong tháng 4</h3>
+                    </div>
+
+                    <div class="countdown-wrap with-dark-border">
+                        <div class="countdown item-4" data-countdown="2023/04/30" data-format="short">
+                            <div class="countdown__item me-3">
+                                <span class="countdown__time daysLeft"></span>
+                                <span class="countdown__text ">Ngày</span>
+                            </div>
+                            <div class="countdown__item me-3">
+                                <span class="countdown__time hoursLeft"></span>
+                                <span class="countdown__text ">Giờ</span>
+                            </div>
+                            <div class="countdown__item me-3">
+                                <span class="countdown__time minsLeft"></span>
+                                <span class="countdown__text ">Phút</span>
+                            </div>
+                            <div class="countdown__item me-3">
+                                <span class="countdown__time secsLeft"></span>
+                                <span class="countdown__text ">Giây</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-hover-secondary mt-8">Xem sản phẩm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+<script src="~/DataHA/assets/js/main.js"></script>

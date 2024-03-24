@@ -1,0 +1,141 @@
+﻿@model WebNoiThat.Models.Product
+
+@{
+    ViewData["Title"] = "Chỉnh sửa sản phẩm :" + Model.ProductName;
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "AdminProducts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="text-danger">@Html.ValidationSummary(true)</div>
+        @Html.HiddenFor(m => m.ProductID)
+        @Html.HiddenFor(m => m.Thumb)
+        @Html.HiddenFor(m => m.DateCreated)
+        <div class="page-header no-gutters has-tab">
+            <div class="d-md-flex m-b-15 align-items-center justify-content-between">
+                <div class="m-b-15">
+                    <button class="btn btn-primary">
+                        <i class="anticon anticon-save"></i>
+                        <span>Save</span>
+                    </button>
+                </div>
+            </div>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#product-edit-basic">THÔNG TIN SẢN PHẨM</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#product-edit-option">THÔNG TIN SEO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#product-edit-description">MÔ TẢ CHI TIẾT</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content m-t-15">
+            <div class="tab-pane fade show active" id="product-edit-basic">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="ProductName">Tên sản phẩm</label>
+                            @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="ShortDesc">Mô tả</label>
+                            @Html.TextBoxFor(m => m.ShortDesc, new { @class = "form-control" })
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="font-weight-semibold" for="productPrice">Giá bán</label>
+                                @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="font-weight-semibold" for="productPrice">Discount</label>
+                                @Html.TextBoxFor(m => m.Discount, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label class="font-weight-semibold" for="productCategory">Danh mục sản phẩm</label>
+                                @Html.DropDownListFor(model => model.CatId, (IEnumerable<SelectListItem>)ViewBag.DanhMuc, "Chọn danh mục", new { @class = "custom-select", style = "min-width: 200px;" })
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="font-weight-semibold" for="productName">Hàng tồn kho</label>
+                                @Html.TextBoxFor(model => model.UnitsInStock, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fThumb">Ảnh đại diện</label>
+                            <input type="file" name="fThumb" id="fThumb" />
+                            @if (!string.IsNullOrEmpty(Model.Thumb))
+                            {
+                                <br />
+                                <img src="@Url.Content("~/DataHA/images/products/" + Model.Thumb)" alt="@Model.ProductName" class="img-thumbnail" />
+                                <br />
+                                <label for="imageName">Image Name</label>
+                                <input type="text" name="imageName" id="imageName" value="@Model.Thumb" class="form-control" />
+                            }
+                        </div>
+
+                        <div class="row">
+                            <div class="m-t-25">
+                                <div class="form-group d-flex align-items-center">
+                                    <div class="switch m-r-10">
+                                        <div class="checkbox">
+                                            <input type="checkbox" id="Active" name="Active" checked value="true">
+                                            <label for="Active"></label>
+                                        </div>
+                                    </div>
+                                    <label>Public</label>
+                                </div>
+                                <div class="form-group d-flex align-items-center">
+                                    <div class="switch m-r-10">
+                                        <input type="checkbox" id="HomeFlag" name="HomeFlag" checked value="true">
+                                        <label for="HomeFlag"></label>
+                                    </div>
+                                    <label>HomeFlag</label>
+                                </div>
+                                <div class="form-group d-flex align-items-center">
+                                    <div class="switch m-r-10">
+                                        <input type="checkbox" id="BestSellers" name="BestSellers" checked value="true">
+                                        <label for="BestSellers"></label>
+                                    </div>
+                                    <label>BestSellers</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="product-edit-option">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="productSize">Title</label>
+                            @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="productColors">MetaDesc</label>
+                            @Html.TextBoxFor(model => model.MetaDesc, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="productFit">MetaKey</label>
+                            @Html.TextBoxFor(model => model.MetaKey, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="productFit">Tags</label>
+                            @Html.TextBoxFor(model => model.Tags, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="product-edit-description">
+                <div class="card">
+                    <div class="card-body">
+                         @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+                    </div>
+                    </div>
+                </div>
+            </div>
+}

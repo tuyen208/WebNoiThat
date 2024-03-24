@@ -1,0 +1,42 @@
+﻿@model List<WebNoiThat.Models.Product>
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @item.ProductID
+            </td>
+            <td>
+                <div class="d-flex align-items-center">
+                    <img class="img-fluid rounded" src="assets/images/others/thumb-9.jpg" style="max-width: 60px" alt="">
+                    <h6 class="m-b-0 m-l-10">@item.ProductName</h6>
+                </div>
+            </td>
+            <td>@item.Cat.CatName</td>
+            <td>@item.Price.Value.ToString("#,##0") VNĐ</td>
+            <td>@item.UnitsInStock</td>
+            <td>
+                @if (item.UnitsInStock.Value > 0)
+                {
+                    <div class="d-flex align-items-center">
+                        <div class="badge badge-success badge-dot m-r-10"></div>
+                        <div>Còn hàng</div>
+                    </div> }
+                else
+                {
+                    <div class="d-flex align-items-center">
+                        <div class="badge badge-success badge-dot m-r-10"></div>
+                        <div>Hết hàng</div>
+                    </div>}
+            </td>
+            <td>
+                <a class="btn btn-primary btn-tone m-r-5" href="@Url.Action("Details", "AdminProducts", new { area = "Admin", id = item.ProductID })">Chi tiết</a>
+                <a class="btn btn-secondary btn-tone m-r-5" href="@Url.Action("Edit", "AdminProducts", new { area = "Admin", id = item.ProductID })">Sửa</a>
+                <a class="btn btn-success btn-tone m-r-5" href="@Url.Action("Delete", "AdminProducts", new { area = "Admin", id = item.ProductID })">Xóa</a>
+
+            </td>
+        </tr>
+    }
+}

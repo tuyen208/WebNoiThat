@@ -1,0 +1,65 @@
+﻿@model IEnumerable<WebNoiThat.Models.ViewModel.ShoppingCart>
+
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Giỏ Hàng</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Images)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quanity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dThanhTien)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr style="font-weight:bold">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <img src="~/DataHA/images/products/@item.Images" width="100" />
+            </td>
+            @using (Html.BeginForm("CapnhatGiohang", "Cart", new { @id = item.ID }))
+            {
+                <td> @String.Format("{0:0,0}", item.Price) VND </td>
+                <td> <input type="number" min="1" name="txtSoLg" value="@item.Quanity" /></td>
+                <td> @Html.DisplayFor(modelItem => item.dThanhTien)</td>
+                <td><a href="@Url.Action("Details", "Product", new {id=item.ID})">Chi Tiết</a> | @Html.ActionLink("Xóa", "XoaGioHang", new { @id = item.ID })</td>
+                <td><input type="submit" value="Cập Nhật" class="btn btn-success" /></td>
+            }
+        </tr>
+    }
+    <tr style="font-weight:bold; text-align:left; color:firebrick">
+        <td colspan="2">Số loại sản phẩm: @ViewBag.Tongsoluongsanpham</td>
+        <td colspan="2">Số lượng sản phẩm: @ViewBag.Tongsoluong</td>
+        <td colspan="4">Tổng Tiền: @String.Format("{0:0,0}", ViewBag.Tongtien) VND</td>
+    </tr>
+    <tr style="font-weight:bold; text-align:right; color:blue">
+        <td colspan="5">
+            @Html.ActionLink("Xóa giỏ hàng", "XoaTatCaGioHang")
+        </td>
+    </tr>
+    <tr style="font-weight:bold; text-align:right; color:yellow">
+        <td colspan="5">
+            @Html.ActionLink("Đặt Hàng", "Dathang", "Cart")
+        </td>
+    </tr>
+
+</table>

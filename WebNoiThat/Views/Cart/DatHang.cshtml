@@ -1,0 +1,131 @@
+﻿@model IEnumerable<WebNoiThat.Models.ViewModel.ShoppingCart>
+
+@{
+    ViewBag.Title = "DatHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> Danh sách đặt hàng</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Images)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quanity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dThanhTien)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <img src="~/DataHA/images/products/@item.Images" width="100" />
+            </td>
+            @using (Html.BeginForm("CapnhatGiohang", "Cart", new { @id = item.ID }))
+            {
+                <td>
+                    @String.Format("{0:0.0}", item.Price) VNĐ
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quanity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dThanhTien)
+                </td>
+            }
+        </tr>
+    }
+    <tr style="font-weight:bold; text-align:left; color:firebrick">
+        <td colspan="3">Số lượng sản phẩm: @ViewBag.Tongsoluong</td>
+        <td colspan="4">Số loại sản phẩm: @ViewBag.Tongsoluongsanpham</td>
+        <td colspan="5">Tổng Tiền: @String.Format("{0:0,0}", ViewBag.Tongtien) VND</td>
+    </tr>
+    <tr style="font-weight:bold; text-align:right; color:blue">
+        <td colspan="5">
+            @Html.ActionLink("Xóa giỏ hàng", "XoaTatCaGioHang")
+        </td>
+    </tr>
+    <tr style="font-weight:bold; text-align:right">
+        <td colspan="6">
+            @Html.ActionLink("Trở về giỏ hàng", "Cart", "Cart")
+        </td>
+    </tr>
+</table>
+@using WebNoiThat.Models
+<h2 style="text-align:center">Thông Tin Đặt Hàng</h2>
+@{
+    Customer kh = (Customer)Session["TaiKhoan"];
+}
+<table align="center">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <tr style="height:40px">
+            <td>Họ tên khách hàng:  </td>
+            <td style="font-weight:bold">@kh.FullName</td>
+        </tr>
+        <tr style="height:40px">
+            <td>Email: </td>
+            <td style="font-weight:bold">@kh.Email</td>
+        </tr>
+        <tr style="height:40px">
+            <td>Địa chỉ: </td>
+            <td style="font-weight:bold">@kh.Address</td>
+        </tr>
+        <tr style="height:40px">
+            <td>Điện thoại: </td>
+            <td style="font-weight:bold">@kh.Phone</td>
+        </tr>
+        <tr style="height:40px">
+            <td>Ngày đặt: </td>
+            <td style="font-weight:bold">@DateTime.Now.ToShortDateString()</td>
+        </tr>
+        <tr style="height:40px">
+            <td>Ngày giao: </td>
+            <td style="font-weight:bold">
+                <input type="date" name="NgayGiao" />
+            </td>
+        </tr>
+
+        <tr style="height:40px">
+            <td></td>
+            <td style="font-weight:bold">
+                <input type="submit" value="Xác Nhận" class="btn btn-success" />
+            </td>
+        </tr>
+    }
+</table>
+<div class="form-group">
+    <div class="control-label col-md-3 Bold"> <b> 	Ghi chú  </b></div>
+    <div class="col-md-9 text-danger">
+        -  Đối với thanh toán bằng tiền mặt. Sản phẩm giao đến quý khách, quý khách kiểm tra sản phẩm sau đó thanh toán cho nhân viên ship.
+        <br />
+        - Đối với thanh toán chuyển khoản:
+        Quý khách chuyển khoản vào tài khoản : 111111. Chủ tài khoản: XXXXXX. Ngân hàng YYYYYY
+        <br />
+        - Nội dung chuyển khoản điền theo mẫu: Họ tên , số điện thoại, Thanh toán mua hàng ICT SHOP.
+    </div>
+</div>
+
+

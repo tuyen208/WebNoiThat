@@ -1,0 +1,284 @@
+﻿@model PagedList.IPagedList<WebNoiThat.Models.Product>
+@using PagedList.Mvc
+
+@{
+    ViewData["TiTle"] = "Shop - " + ViewBag.CurrentPage;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    /*    int PageCurrent = ViewBag.CurrentPage;
+        int PageNext = PageCurrent + 1;*/
+}
+<!-- Begin Main Content Area -->
+<main class="main-content">
+    <div class="breadcrumb-area breadcrumb-height" data-bg-image="/DataHA/assets/images/banner/2-1-1920x523.jpg">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-item">
+                        <h1 class="breadcrumb-heading">Shop Nội Thất</h1>
+                        <ul>
+                            <li>
+                                <a href="/">Trang chủ <i class="pe-7s-angle-right"></i></a>
+                            </li>
+                            <li>DANH SÁCH SẢN PHẨM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shop-area section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 order-lg-1 order-2 pt-10 pt-lg-0">
+                    <div class="sidebar-area">
+                        <div class="widgets-searchbox mb-9">
+                            <form>
+                                @using (Html.BeginForm("index", "Product", FormMethod.Get, new { }))
+                                {
+                                    <div class="input-group">
+                                        @Html.TextBox("SearchString")
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-lg btn-outline-primary">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+
+                            </form>
+                        </div>
+                        <div class="widgets-area mb-9">
+                            <h2 class="widgets-title mb-5">Sản phẩm bán chạy</h2>
+                            <div class="widgets-item">
+                                <div class="swiper-container widgets-list-slider">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <div class="product-list-item">
+                                                <div class="product-img img-zoom-effect">
+                                                    <a href="single-product.html">
+                                                        <img class="img-full" src="~/DataHA/assets/images/product/small-size/1-1-112x124.jpg" alt="Product Images">
+                                                    </a>
+                                                </div>
+                                                <div class="product-content">
+                                                    <a class="product-name" href="single-product.html">Dried Lemon Green</a>
+                                                    <div class="price-box pb-1">
+                                                        <span class="new-price">$80.00</span>
+                                                    </div>
+                                                    <div class="rating-box-wrap">
+                                                        <div class="rating-box">
+                                                            <ul>
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="product-list-item">
+                                                <div class="product-img img-zoom-effect">
+                                                    <a href="single-product.html">
+                                                        <img class="img-full" src="~/DataHA/assets/images/product/small-size/1-2-112x124.jpg" alt="Product Images">
+                                                    </a>
+                                                </div>
+                                                <div class="product-content">
+                                                    <a class="product-name" href="single-product.html">Natural Coconut</a>
+                                                    <div class="price-box pb-1">
+                                                        <span class="new-price">$80.00</span>
+                                                    </div>
+                                                    <div class="rating-box-wrap">
+                                                        <div class="rating-box">
+                                                            <ul>
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="product-list-item">
+                                                <div class="product-img img-zoom-effect">
+                                                    <a href="single-product.html">
+                                                        <img class="img-full" src="~/DataHA/assets/images/product/small-size/1-3-112x124.jpg" alt="Product Images">
+                                                    </a>
+                                                </div>
+                                                <div class="product-content">
+                                                    <a class="product-name" href="single-product.html">Black Peppepr Read</a>
+                                                    <div class="price-box pb-1">
+                                                        <span class="new-price">$80.00</span>
+                                                    </div>
+                                                    <div class="rating-box-wrap">
+                                                        <div class="rating-box">
+                                                            <ul>
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                                <li><i class="pe-7s-star"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-9 order-lg-2 order-1">
+                    <div class="product-topbar">
+                        <ul>
+                            <li class="product-view-wrap">
+                                <ul class="nav" role="tablist">
+                                    <li class="grid-view" role="presentation">
+                                        <a id="grid-view-tab" data-bs-toggle="tab" href="#grid-view" role="tab" aria-selected="true">
+                                            <i class="fa fa-th"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-view" role="presentation">
+                                        <a class="active" id="list-view-tab" data-bs-toggle="tab" href="#list-view" role="tab" aria-selected="true">
+                                            <i class="fa fa-th-list"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="page-count">
+                                <span>12</span> Product Found of <span>50</span>
+                            </li>
+                            <li for="sortOrder">
+
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-content text-charcoal pt-8">
+                        <div class="tab-pane fade" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab">
+                            <div class="product-grid-view row">
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        string url = "/Product/Details/" + item.ProductID;
+                                        <div class="col-lg-4 col-sm-6">
+                                            <div class="product-item">
+                                                <div class="product-img img-zoom-effect">
+                                                    <a>
+                                                        <img class="img-full" src="~/DataHA/images/products/@item.Thumb" alt="@item.Title">
+                                                    </a>
+                                                    <div class="product-add-action">
+                                                        <ul>
+                                                            <li>
+                                                                <a href="@Url.Action("ThemGioHang", "Cart", new { @ID = item.ProductID, @strURL = Request.Url.ToString() })">
+                                                                    <i class="pe-7s-cart"></i>
+                                                                </a>
+</ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content">
+                                                    <a class="product-name" href="@url">@item.ProductName</a>
+                                                    <div class="price-box pb-1">
+                                                        <span class="new-price">@string.Format("{0:#,##0} VND", item.Price == null ? 0 : item.Price.Value)</span>
+                                                    </div>
+                                                    <div class="rating-box">
+                                                        <ul>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show active" id="list-view" role="tabpanel" aria-labelledby="list-view-tab">
+                            <div class="product-list-view with-sidebar row">
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        string url = "/Product/Details/" + item.ProductID;
+                                        <div class="col-12 pt-6">
+                                            <div class="product-item">
+                                                <div class="product-img img-zoom-effect">
+                                                    <a href="@url">
+                                                        <img class="img-full" src="~/DataHA/images/products/@item.Thumb" alt="@item.Title">
+                                                    </a>
+                                                    <div class="product-add-action">
+                                                        <ul>
+                                                            <li>
+                                                                <a href="@Url.Action("ThemGioHang", "Cart", new { @ID = item.ProductID, @strURL = Request.Url.ToString() })">
+                                                                    <i class="pe-7s-cart"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content align-self-center">
+                                                    <a class="product-name pb-2" href="@url">@item.ProductName</a>
+                                                    <div class="price-box pb-1">
+                                                        <span class="new-price">@string.Format("{0:#,##0} VND", item.Price == null ? 0 : item.Price.Value)</span>
+                                                    </div>
+                                                    <div class="rating-box pb-2">
+                                                        <ul>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <p class="short-desc mb-0">@item.ShortDesc</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                    <div aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item @(!Model.HasPreviousPage ? "disabled" : "")">
+                                <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            @for (int i = 1; i <= Model.PageCount; i++)
+                            {
+                                <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                                    <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                                </li>
+                            }
+                            <li class="page-item @(!Model.HasNextPage ? "disabled" : "")">
+                                <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1 })" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Main Content Area End Here -->
+    

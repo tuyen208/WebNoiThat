@@ -1,0 +1,88 @@
+﻿@model WebNoiThat.Models.Account
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("Edit", "AdminAccounts", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="text-danger">@Html.ValidationSummary(true)</div>
+    @Html.HiddenFor(m => m.AccountID)
+    <div class="page-header no-gutters has-tab">
+        <div class="d-md-flex m-b-15 align-items-center justify-content-between">
+            <div class="m-b-15">
+                <button class="btn btn-primary">
+                    <i class="anticon anticon-save"></i>
+                    <span>Save</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="tab-content m-t-15">
+        <div class="tab-pane fade show active" id="product-edit-basic">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="ProductName">Tên tài khoản</label>
+                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="ShortDesc">Email</label>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+                    <div class="row">
+                        <div class="form-group  col-md-6">
+                            <label class="font-weight-semibold" for="productPrice">Mật khẩu</label>
+                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="font-weight-semibold" for="productPrice">Số điện thoại</label>
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label class="font-weight-semibold" for="productCategory">Quyền</label>
+                            @Html.DropDownListFor(model => model.RoleID, (IEnumerable<SelectListItem>)ViewBag.DanhMuc, "Chọn danh mục", new { @class = "custom-select", style = "min-width: 200px;" })
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="font-weight-semibold" for="productName"> Salt</label>
+                            @Html.TextBoxFor(model => model.Salt, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="m-t-25">
+                            <div class="form-group d-flex align-items-center">
+                                <div class="switch m-r-10">
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="Active" name="Active" checked value="true">
+                                        <label for="Active"></label>
+                                    </div>
+                                </div>
+                                <label>Active</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="LastLogin" class="control-label">Last Login</label>
+                                <input name="LastLogin" class="form-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="CreateDate" class="control-label">Create Date</label>
+                                <input name="CreateDate" class="form-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+} 
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
